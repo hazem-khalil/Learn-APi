@@ -11,7 +11,6 @@ use App\Http\Resources\PersonResourceCollection;
 class PeopleController extends Controller
 {
     /**
-     * @param  Person  $person
      * @return PersonResourceCollection
      */
     public function index(): PersonResourceCollection
@@ -29,7 +28,7 @@ class PeopleController extends Controller
     }
 
     /**
-     * @param  Person  $person
+     * @param  PersonRequest  $request
      * @return PersonResource
      */
     public function store(PersonRequest $request): PersonResource
@@ -40,7 +39,7 @@ class PeopleController extends Controller
 
     /**
      * assuming the user will input valid data until now
-     * @param  Person  $person
+     * @param  Person  $person, Request $request
      * @return PersonResource
      */
     public function update(Person $person, Request $request): PersonResource
@@ -48,5 +47,15 @@ class PeopleController extends Controller
         $person->update($request->all());
         return new PersonResource($person);
         // return new PersonResource($person);
+    }
+
+    /**
+     * @param  Person  $person
+     * @return String
+     */
+    public function destroy(Person $person)
+    {
+        $person->delete($person);
+        return "Person Created Successfully";
     }
 }
