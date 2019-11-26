@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Person;
-use Illuminate\Http\Request;
+use App\Http\Requests\PersonRequest;
 use App\Http\Resources\PersonResource;
 use App\Http\Resources\PersonResourceCollection;
 
@@ -24,6 +24,16 @@ class PeopleController extends Controller
      */
     public function show(Person $person): PersonResource
     {
+        return new PersonResource($person);
+    }
+
+    /**
+     * @param  Person  $person
+     * @return PersonResourceCollection
+     */
+    public function store(PersonRequest $request)
+    {
+        $person = Person::create(request()->all());
         return new PersonResource($person);
     }
 }
